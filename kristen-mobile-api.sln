@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kristen-mobile-api", "kristen-mobile-api\kristen-mobile-api.csproj", "{E0228C8B-A6C4-407D-9C55-19A601960ADE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0228C8B-A6C4-407D-9C55-19A601960ADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0228C8B-A6C4-407D-9C55-19A601960ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0228C8B-A6C4-407D-9C55-19A601960ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0228C8B-A6C4-407D-9C55-19A601960ADE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {170D5F18-6E48-4FC9-9F6E-AA5FE0429240}
+	EndGlobalSection
+EndGlobal
