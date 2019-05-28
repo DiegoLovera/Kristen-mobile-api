@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using kristen_mobile_api.Business;
+using kristen_mobile_api.Business.Interfaces;
 using kristen_mobile_api.Clients.Interfaces;
 using kristen_mobile_api.Clients.Upqroo.Kristen.Api;
 using kristen_mobile_api.Clients.Upqroo.Sie.Api;
@@ -15,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace kristen_mobile_api
 {
@@ -35,7 +38,31 @@ namespace kristen_mobile_api
 
             services.AddTransient<IKristenClient, KristenClient>();
             services.AddTransient<ISieClient, SieClient>();
+            services.AddTransient<IKristenBusiness, KristenBusiness>();
+            services.AddTransient<ISieBusiness, SieBusiness>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "ToDo API",
+                    Description = "A simple example ASP.NET Core Web API",
+                    TermsOfService = "None",
+                    Contact = new Contact
+                    {
+                        Name = "Diego Lovera",
+                        Email = "DiegoLovera010@gmail.com",
+                        Url = string.Empty
+                    },
+                    License = new License
+                    {
+                        Name = "Use under LICX",
+                        Url = "https://example.com/license"
+                    }
+                });
+            });
 
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -59,6 +86,18 @@ namespace kristen_mobile_api
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
+
 
             app.UseHttpsRedirection();
             app.UseMvc();

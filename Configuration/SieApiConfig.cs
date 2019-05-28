@@ -7,5 +7,6 @@ namespace kristen_mobile_api.Configuration
 {
     public class SieApiConfig
     {
+        public string BaseAddress { get; set; }
     }
 }
