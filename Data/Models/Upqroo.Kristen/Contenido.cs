@@ -9,9 +9,9 @@ namespace kristen_mobile_api.Data.Models.Upqroo.Kristen
     public class Contenido
     {
         [JsonProperty("idTipoContenidos")]
-        private int ContentTypeId { get; set; }
+        public int ContentTypeId { get; set; }
 
         [JsonProperty("contenido")]
-        private Contenido_ Content { get; set; }
+        public Contenido_ Content { get; set; }
     }
 }

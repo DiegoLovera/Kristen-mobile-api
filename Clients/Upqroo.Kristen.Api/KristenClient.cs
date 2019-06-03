@@ -40,9 +40,11 @@ namespace kristen_mobile_api.Clients.Upqroo.Kristen.Api
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<string>> GetNoticesAsync(string filter)
+        public async Task<IEnumerable<Notice>> GetNoticesAsync(string filter)
         {
-            throw new NotImplementedException();
+            var response = await _client.GetAsync($"{_apiConfig.BaseAddress + _apiConfig.Notice}?" + filter).ConfigureAwait(false);
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<IEnumerable<Notice>>(json);
         }
     }
 }

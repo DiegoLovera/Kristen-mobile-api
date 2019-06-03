@@ -9,36 +9,36 @@ namespace kristen_mobile_api.Data.Models.Upqroo.Kristen
     public class Contenido_
     {
         [JsonProperty("texto")]
-        private string Text { get; set; }
+        public string Text { get; set; }
 
         [JsonProperty("src")]
-        private string Source { get; set; }
+        public string Source { get; set; }
 
         [JsonProperty("alt")]
-        private string Alt { get; set; }
+        public string Alt { get; set; }
 
         [JsonProperty("id")]
-        private string Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("servidor")]
-        private string Server { get; set; }
+        public string Server { get; set; }
 
         [JsonProperty("titulo")]
-        private string Title { get; set; }
+        public string Title { get; set; }
 
         [JsonProperty("ordenada")]
-        private string HasOrder { get; set; }
+        public bool HasOrder { get; set; }
 
         [JsonProperty("cantidad")]
-        private int Quantity { get; set; }
+        public int Quantity { get; set; }
 
         [JsonProperty("elementos")]
-        private List<string> Elements { get; set; }
+        public List<string> Elements { get; set; }
 
         [JsonProperty("ur")]
-        private string Url { get; set; }
+        public string Url { get; set; }
 
         [JsonProperty("imagenes")]
-        private List<string> Images { get; set; }
+        public List<string> Images { get; set; }
     }
 }

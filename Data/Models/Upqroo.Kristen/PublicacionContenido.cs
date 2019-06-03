@@ -10,39 +10,39 @@ namespace kristen_mobile_api.Data.Models
     public class PublicacionContenido
     {
         [JsonProperty("idPublicaciones")]
-        private string NewsId;
+        public string NewsId;
 
         [JsonProperty("url")]
-        private string Url;
+        public string Url;
 
         [JsonProperty("titulo")]
-        private string Title;
+        public string Title;
 
         [JsonProperty("descripcion")]
-        private string Description;
+        public string Description;
 
         [JsonProperty("portada")]
-        private string Cover;
+        public string Cover;
 
         [JsonProperty("categorias")]
-        private string Category;
+        public string Category;
 
         [JsonProperty("fecha")]
-        private string Date;
+        public string Date;
 
         [JsonProperty("idTipos_Publicacion")]
-        private int NewsTypeId;
+        public int NewsTypeId;
 
         [JsonProperty("idUsuarios")]
-        private string UsersId;
+        public string UsersId;
 
         [JsonProperty("idCarrera")]
-        private int CareerId;
+        public int CareerId;
 
         [JsonProperty("autor")]
-        private string Author;
+        public string Author;
 
         [JsonProperty("contenidos")]
-        private List<Contenido> Contents;
+        public List<Contenido> Contents;
     }
 }

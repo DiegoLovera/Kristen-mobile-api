@@ -1,4 +1,5 @@
-﻿using kristen_mobile_api.Business.Interfaces;
+﻿using kristen_mobile_api.Business.Enums;
+using kristen_mobile_api.Business.Interfaces;
 using kristen_mobile_api.Clients.Interfaces;
 using kristen_mobile_api.Data.Models;
 using kristen_mobile_api.Data.Models.Upqroo.Kristen;
@@ -23,16 +24,62 @@ namespace kristen_mobile_api.Business
             return ConvertToNewsDetail(response);
         }
 
+        public async Task<IEnumerable<Notice>> GetNoticesAsync()
+        {
+            string filter = "{\"where\": {\"or\": [{\"idCarrera\": 99},{\"idCarrera\": 1}]}, \"order\": \"fecha DESC\", \"skip\": 0, \"limit\": 10 }";
+            return await _apiClient.GetNoticesAsync(filter);
+        }
+
         private NewsDetail ConvertToNewsDetail(PublicacionContenido toConvert)
         {
-            NewsDetail response = new NewsDetail();
-            response.NewsDetailContent = ConvertToNewsDetailContents(toConvert.Contenido);
+            NewsDetail response = new NewsDetail
+            {
+                NewsId = toConvert.NewsId,
+                Url = toConvert.Url,
+                Title = toConvert.Title,
+                Description = toConvert.Description,
+                ImageCover = toConvert.Cover,
+                Categories = toConvert.Category,
+                Date = toConvert.Date,
+                NewsTypeId = toConvert.NewsTypeId,
+                CareerId = toConvert.CareerId,
+                Author = toConvert.Author,
+                ContentList = ConvertToNewsDetailContents(toConvert.Contents)
+            };
             return response;
         }
 
-        private List<NewsDetailContent> ConvertToNewsDetailContents(IEnumerable<Contenido> toConvert)
+        private List<Content> ConvertToNewsDetailContents(IEnumerable<Contenido> toConvert)
         {
-            throw new NotImplementedException();
+            List<Content> contents = new List<Content>();
+            foreach (Contenido c in toConvert)
+            {
+                switch (c.ContentTypeId)
+                {
+                    case (int)EContentType.Text:
+                        contents.Add(Content.CreateTextContent(c.Content.Text));
+                        break;
+                    case (int)EContentType.Image:
+                        contents.Add(Content.CreateImageContent(c.Content.Alt, c.Content.Source));
+                        break;
+                    case (int)EContentType.Link:
+                        contents.Add(Content.CreateLinkContent(c.Content.Text, c.Content.Url));
+                        break;
+                    case (int)EContentType.Gallery:
+                        contents.Add(Content.CreateGalleryContent(c.Content.Images));
+                        break;
+                    case (int)EContentType.Video:
+                        contents.Add(Content.CreateVideoContent(c.Content.Id, c.Content.Server));
+                        break;
+                    case (int)EContentType.List:
+                        contents.Add(Content.CreateListContent(c.Content.Title, c.Content.HasOrder, c.Content.Elements));
+                        break;
+                    case (int)EContentType.Title:
+                        contents.Add(Content.CreateTitleContent(c.Content.Text));
+                        break;
+                }
+            }
+            return contents;
         }
     }
 }

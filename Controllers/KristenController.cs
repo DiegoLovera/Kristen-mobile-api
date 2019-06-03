@@ -1,5 +1,6 @@
 ﻿using kristen_mobile_api.Business.Interfaces;
 using kristen_mobile_api.Clients.Interfaces;
+using kristen_mobile_api.Data.Models;
 using kristen_mobile_data.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,11 +20,16 @@ namespace kristen_mobile_api.Controllers
             _apiBusiness = apiBusiness;
         }
 
-        // GET api/values/5
         [HttpGet("/News/{id}")]
-        public async Task<ActionResult<string>> Get(string id)
+        public async Task<ActionResult<NewsDetail>> GetNewsDetail(string id)
         {
-            return await apiBusiness.GetNewsContentsAsync(id);
+            return Ok(await _apiBusiness.GetNewsDetailAsync(id));
+        }
+
+        [HttpGet("/Notices")]
+        public async Task<ActionResult<IEnumerable<Notice>>> GetNotices()
+        {
+            return Ok(await _apiBusiness.GetNoticesAsync());
         }
     }
 }

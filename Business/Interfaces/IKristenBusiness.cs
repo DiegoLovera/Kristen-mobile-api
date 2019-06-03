@@ -10,5 +10,6 @@ namespace kristen_mobile_api.Business.Interfaces
     public interface IKristenBusiness
     {
         Task<NewsDetail> GetNewsDetailAsync(string id);
+        Task<IEnumerable<Notice>> GetNoticesAsync();
     }
 }
