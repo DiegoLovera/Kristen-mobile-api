@@ -20,7 +20,13 @@ namespace kristen_mobile_api.Controllers
             _apiBusiness = apiBusiness;
         }
 
-        [HttpGet("/News/{id}")]
+        [HttpGet("/News/{career}")]
+        public async Task<ActionResult<NewsDetail>> GetNews(string career, [FromQuery] int skip)
+        {
+            return Ok(await _apiBusiness.GetNewsAsync(career, skip));
+        }
+
+        [HttpGet("/News/Content/{id}")]
         public async Task<ActionResult<NewsDetail>> GetNewsDetail(string id)
         {
             return Ok(await _apiBusiness.GetNewsDetailAsync(id));
@@ -30,6 +36,18 @@ namespace kristen_mobile_api.Controllers
         public async Task<ActionResult<IEnumerable<Notice>>> GetNotices()
         {
             return Ok(await _apiBusiness.GetNoticesAsync());
+        }
+
+        [HttpGet("/Calendar")]
+        public async Task<ActionResult<string>> GetCalendar()
+        {
+            return Ok(await _apiBusiness.GetCalendarUrlAsync());
+        }
+
+        [HttpGet("/Contacts")]
+        public async Task<ActionResult<IEnumerable<Contact>>> GetContacts()
+        {
+            return Ok(await _apiBusiness.GetContactsAsync());
         }
     }
 }

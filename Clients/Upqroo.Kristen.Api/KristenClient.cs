@@ -20,7 +20,9 @@ namespace kristen_mobile_api.Clients.Upqroo.Kristen.Api
         }
         public async Task<IEnumerable<News>> GetNewsAsync(string filter)
         {
-            throw new NotImplementedException();
+            var response = await _client.GetAsync($"{_apiConfig.BaseAddress + _apiConfig.Publication}?" + filter).ConfigureAwait(false);
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<IEnumerable<News>>(json);
         }
 
         public async Task<PublicacionContenido> GetNewsContentsAsync(string id)
@@ -30,14 +32,18 @@ namespace kristen_mobile_api.Clients.Upqroo.Kristen.Api
             return JsonConvert.DeserializeObject<PublicacionContenido>(json);
         }
 
-        public async Task<string> GetCalendarUrlAsync()
+        public async Task<PublicacionContenido> GetCalendarUrlAsync()
         {
-            throw new NotImplementedException();
+            var response = await _client.GetAsync($"{_apiConfig.BaseAddress + _apiConfig.InstitutionalInformation}/findOne?filter=%7B%22where%22%3A%7B%22idTipos_Informacion%22%3A10%7D%2C%22fields%22%3A%7B%22contenidos%22%3Atrue%7D%7D").ConfigureAwait(false);
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<PublicacionContenido>(json);
         }
 
-        public async Task<IEnumerable<string>> GetContactsAsync()
+        public async Task<IEnumerable<Contact>> GetContactsAsync()
         {
-            throw new NotImplementedException();
+            var response = await _client.GetAsync($"{_apiConfig.BaseAddress + _apiConfig.Contacts}/").ConfigureAwait(false);
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<IEnumerable<Contact>>(json);
         }
 
         public async Task<IEnumerable<Notice>> GetNoticesAsync(string filter)

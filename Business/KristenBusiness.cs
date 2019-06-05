@@ -3,6 +3,7 @@ using kristen_mobile_api.Business.Interfaces;
 using kristen_mobile_api.Clients.Interfaces;
 using kristen_mobile_api.Data.Models;
 using kristen_mobile_api.Data.Models.Upqroo.Kristen;
+using kristen_mobile_data.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,25 @@ namespace kristen_mobile_api.Business
         public KristenBusiness(IKristenClient kristenClient)
         {
             _apiClient = kristenClient;
+        }
+
+        public async Task<IEnumerable<News>> GetNewsAsync(string career, int skip)
+        {
+            string filter = "{\"fields\": {\"contenidos\": false},\"where\": {\"or\": [{\"idCarrera\": 99},{\"idCarrera\": X}]}, \"order\": \"fecha DESC\", \"skip\": Y, \"limit\": 5 }";
+            filter.Replace("X", career);
+            filter.Replace("Y", skip.ToString());
+            return await _apiClient.GetNewsAsync(filter);
+        }
+
+        public async Task<string> GetCalendarUrlAsync()
+        {
+            var response = await _apiClient.GetCalendarUrlAsync();
+            return response.Contents.First().Content.Url;
+        }
+
+        public async Task<IEnumerable<Contact>> GetContactsAsync()
+        {
+            return await _apiClient.GetContactsAsync();
         }
 
         public async Task<NewsDetail> GetNewsDetailAsync(string id)

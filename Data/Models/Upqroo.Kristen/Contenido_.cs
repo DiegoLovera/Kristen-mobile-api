@@ -35,7 +35,7 @@ namespace kristen_mobile_api.Data.Models.Upqroo.Kristen
         [JsonProperty("elementos")]
         public List<string> Elements { get; set; }
 
-        [JsonProperty("ur")]
+        [JsonProperty("url")]
         public string Url { get; set; }
 
         [JsonProperty("imagenes")]

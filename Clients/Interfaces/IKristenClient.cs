@@ -11,8 +11,8 @@ namespace kristen_mobile_api.Clients.Interfaces
     {
         Task<IEnumerable<News>> GetNewsAsync(string filter);
         Task<IEnumerable<Notice>> GetNoticesAsync(string filter);
-        Task<IEnumerable<string>> GetContactsAsync();
-        Task<string> GetCalendarUrlAsync();
+        Task<IEnumerable<Contact>> GetContactsAsync();
+        Task<PublicacionContenido> GetCalendarUrlAsync();
         Task<PublicacionContenido> GetNewsContentsAsync(string id);
     }
 }
