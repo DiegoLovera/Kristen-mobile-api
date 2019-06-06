@@ -20,13 +20,13 @@ namespace kristen_mobile_api.Controllers
             _apiBusiness = apiBusiness;
         }
 
-        [HttpGet("/News/{career}")]
-        public async Task<ActionResult<NewsDetail>> GetNews(string career, [FromQuery] int skip)
+        [HttpGet("/News")]
+        public async Task<ActionResult<NewsDetail>> GetNews([FromQuery]string career, [FromQuery]string skip)
         {
             return Ok(await _apiBusiness.GetNewsAsync(career, skip));
         }
 
-        [HttpGet("/News/Content/{id}")]
+        [HttpGet("/News/{id}")]
         public async Task<ActionResult<NewsDetail>> GetNewsDetail(string id)
         {
             return Ok(await _apiBusiness.GetNewsDetailAsync(id));

@@ -20,7 +20,7 @@ namespace kristen_mobile_api.Clients.Upqroo.Kristen.Api
         }
         public async Task<IEnumerable<News>> GetNewsAsync(string filter)
         {
-            var response = await _client.GetAsync($"{_apiConfig.BaseAddress + _apiConfig.Publication}?" + filter).ConfigureAwait(false);
+            var response = await _client.GetAsync($"{_apiConfig.BaseAddress + _apiConfig.Publication}?filter=" + Uri.EscapeUriString(filter)).ConfigureAwait(false);
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<IEnumerable<News>>(json);
         }

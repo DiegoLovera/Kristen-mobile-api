@@ -19,11 +19,18 @@ namespace kristen_mobile_api.Business
             _apiClient = kristenClient;
         }
 
-        public async Task<IEnumerable<News>> GetNewsAsync(string career, int skip)
+        public async Task<IEnumerable<News>> GetNewsAsync(string career, string skip)
         {
-            string filter = "{\"fields\": {\"contenidos\": false},\"where\": {\"or\": [{\"idCarrera\": 99},{\"idCarrera\": X}]}, \"order\": \"fecha DESC\", \"skip\": Y, \"limit\": 5 }";
-            filter.Replace("X", career);
-            filter.Replace("Y", skip.ToString());
+            if (string.IsNullOrEmpty(career))
+            {
+                career = "99";
+            }
+            if (string.IsNullOrEmpty(skip))
+            {
+                skip = "0";
+            }
+
+            string filter = "{\"fields\": {\"contenidos\": false},\"where\": {\"or\": [{\"idCarrera\": 99},{\"idCarrera\": " + career + "}]}, \"order\": \"fecha DESC\", \"skip\": " + skip.ToString() + ", \"limit\": 5 }";
             return await _apiClient.GetNewsAsync(filter);
         }
 

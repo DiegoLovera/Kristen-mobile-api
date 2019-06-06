@@ -10,7 +10,7 @@ namespace kristen_mobile_api.Business.Interfaces
 {
     public interface IKristenBusiness
     {
-        Task<IEnumerable<News>> GetNewsAsync(string career, int skip);
+        Task<IEnumerable<News>> GetNewsAsync(string career, string skip);
         Task<NewsDetail> GetNewsDetailAsync(string id);
         Task<IEnumerable<Notice>> GetNoticesAsync();
         Task<string> GetCalendarUrlAsync();
