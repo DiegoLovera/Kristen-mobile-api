@@ -17,10 +17,19 @@ namespace kristen_mobile_api.Configuration
             // assign the C# property name
             foreach (JsonProperty prop in list)
             {
-                prop.PropertyName = prop.UnderlyingName;
+                prop.PropertyName = ToCamelCase(prop.UnderlyingName);
             }
 
             return list;
+        }
+
+        private string ToCamelCase(string str)
+        {
+            if (!string.IsNullOrEmpty(str) && str.Length > 1)
+            {
+                return char.ToLowerInvariant(str[0]) + str.Substring(1);
+            }
+            return str;
         }
     }
 }

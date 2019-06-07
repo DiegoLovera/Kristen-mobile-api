@@ -20,12 +20,12 @@ namespace kristen_mobile_api.Business
 
         public async Task<IEnumerable<Grade>> GetGradesAsync(string userId, string accessToken)
         {
-            throw new NotImplementedException();
+            return await _apiClient.GetGradesAsync(userId, accessToken);
         }
 
         public async Task<IEnumerable<Kardex>> GetKardexsAsync(string userId, string accessToken)
         {
-            throw new NotImplementedException();
+            return await _apiClient.GetKardexsAsync(userId, accessToken);
         }
 
         public async Task<IEnumerable<SchoolDay>> GetScheduleAsync(string userId, string accessToken)
