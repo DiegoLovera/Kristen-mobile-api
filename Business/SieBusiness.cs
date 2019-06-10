@@ -28,9 +28,9 @@ namespace kristen_mobile_api.Business
             return await _apiClient.GetKardexsAsync(userId, accessToken);
         }
 
-        public async Task<IEnumerable<SchoolDay>> GetScheduleAsync(string userId, string accessToken)
+        public async Task<Week> GetScheduleAsync(string userId, string accessToken)
         {
-            throw new NotImplementedException();
+            return await _apiClient.GetScheduleAsync(userId, accessToken);
         }
 
         public async Task<LoginResponse> LoginAsync(LoginRequest request)

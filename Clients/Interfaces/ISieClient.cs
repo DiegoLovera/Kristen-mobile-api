@@ -13,6 +13,6 @@ namespace kristen_mobile_api.Clients.Interfaces
         Task<LoginResponse> LoginAsync(LoginRequest request);
         Task<IEnumerable<Grade>> GetGradesAsync(string userId, string accessToken);
         Task<IEnumerable<Kardex>> GetKardexsAsync(string userId, string accessToken);
-        Task<IEnumerable<Semana>> GetScheduleAsync(string userId, string accessToken);
+        Task<Week> GetScheduleAsync(string userId, string accessToken);
     }
 }

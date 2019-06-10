@@ -33,13 +33,13 @@ namespace kristen_mobile_api.Controllers
         }
 
         [HttpGet("/Kardex/{studentId}")]
-        public async Task<ActionResult<IEnumerable<Grade>>> GetKardex(string studentId, [FromQuery]string accessToken)
+        public async Task<ActionResult<IEnumerable<Kardex>>> GetKardex(string studentId, [FromQuery]string accessToken)
         {
             return Ok(await _apiBusiness.GetKardexsAsync(studentId, accessToken));
         }
 
         [HttpGet("/Schedule/{studentId}")]
-        public async Task<ActionResult<IEnumerable<Grade>>> GetSchedule(string studentId, [FromQuery]string accessToken)
+        public async Task<ActionResult<Week>> GetSchedule(string studentId, [FromQuery]string accessToken)
         {
             return Ok(await _apiBusiness.GetScheduleAsync(studentId, accessToken));
         }

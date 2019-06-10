@@ -36,11 +36,11 @@ namespace kristen_mobile_api.Clients.Upqroo.Sie.Api
             return JsonConvert.DeserializeObject<IEnumerable<Kardex>>(json);
         }
 
-        public async Task<IEnumerable<Semana>> GetScheduleAsync(string userId, string accessToken)
+        public async Task<Week> GetScheduleAsync(string userId, string accessToken)
         {
             var response = await _client.GetAsync($"{_apiConfig.BaseAddress + _apiConfig.Schedule}/{userId}?access_token={accessToken}").ConfigureAwait(false);
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<IEnumerable<Semana>>(json);
+            return JsonConvert.DeserializeObject<Week>(json);
         }
 
         public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
