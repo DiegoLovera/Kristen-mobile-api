@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using kristen_mobile_api.Business;
+﻿using kristen_mobile_api.Business;
 using kristen_mobile_api.Business.Interfaces;
 using kristen_mobile_api.Clients.Interfaces;
 using kristen_mobile_api.Clients.Upqroo.Kristen.Api;
@@ -11,14 +6,13 @@ using kristen_mobile_api.Clients.Upqroo.Sie.Api;
 using kristen_mobile_api.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.IO;
 
 namespace kristen_mobile_api
 {
@@ -60,7 +54,7 @@ namespace kristen_mobile_api
                     {
                         Name = "Diego Lovera",
                         Email = "DiegoLovera010@gmail.com",
-                        Url = string.Empty
+                        Url = "https://diegolovera.github.io/"
                     },
                     License = new License
                     {

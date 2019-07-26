@@ -1,13 +1,12 @@
-﻿using kristen_mobile_api.Clients.Interfaces;
+﻿using kristen_mobile_api.Business.Exceptions;
+using kristen_mobile_api.Clients.Interfaces;
 using kristen_mobile_api.Configuration;
 using kristen_mobile_api.Data.Models;
 using kristen_mobile_api.Data.Models.Upqroo.Sie;
 using kristen_mobile_data.Data.Models.Upqroo.Sie;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +24,10 @@ namespace kristen_mobile_api.Clients.Upqroo.Sie.Api
         public async Task<IEnumerable<Grade>> GetGradesAsync(string userId, string accessToken)
         {
             var response = await _client.GetAsync($"{_apiConfig.BaseAddress + _apiConfig.Grades}/{userId}?access_token={accessToken}").ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApiRequestException(response.StatusCode);
+            }
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<IEnumerable<Grade>>(json);
         }
@@ -32,6 +35,10 @@ namespace kristen_mobile_api.Clients.Upqroo.Sie.Api
         public async Task<IEnumerable<Kardex>> GetKardexsAsync(string userId, string accessToken)
         {
             var response = await _client.GetAsync($"{_apiConfig.BaseAddress + _apiConfig.Kardex}/{userId}?access_token={accessToken}").ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApiRequestException(response.StatusCode);
+            }
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<IEnumerable<Kardex>>(json);
         }
@@ -39,6 +46,10 @@ namespace kristen_mobile_api.Clients.Upqroo.Sie.Api
         public async Task<Week> GetScheduleAsync(string userId, string accessToken)
         {
             var response = await _client.GetAsync($"{_apiConfig.BaseAddress + _apiConfig.Schedule}/{userId}?access_token={accessToken}").ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApiRequestException(response.StatusCode);
+            }
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<Week>(json);
         }
@@ -48,6 +59,10 @@ namespace kristen_mobile_api.Clients.Upqroo.Sie.Api
             var request = JsonConvert.SerializeObject(loginRequest);
             var requestContent = new StringContent(request, Encoding.UTF8, "application/json");
             var response = await _client.PostAsync($"{_apiConfig.BaseAddress + _apiConfig.User}/Login", requestContent).ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApiRequestException(response.StatusCode);
+            }
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (json.Contains("Error"))
             {
